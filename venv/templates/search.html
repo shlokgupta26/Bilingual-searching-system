@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+{% block body %}
+{% include '_nav_bar.html' %}
+
+  <div class="container">
+    <form class="mt-5" name="search" action="/search_results">
+      <div class="col-6 mx-auto input-group">
+        <input type="text" class="form-control" name="search1" value="{{ request.args.get('search1') }}" placeholder="query..."
+        size="50">
+        <input type="text" class="form-control" name="search2" value="{{ request.args.get('search2') }}" placeholder="No_of_results"
+        maxlength="4" size="4">
+        <button type="submit" class="btn btn-success">Search</button>
+      </div>
+    </form>
+  </div>
+  <br>
+  <div class="container">
+    {% for doc in results %}
+      <div class="col mt-3">
+        <div class="col">
+          <div class="container border border-secondary">
+              <strong>{{ doc[0] }}:</strong>
+              {{ doc[1] }}
+          </div>
+        </div>
+      </div>
+    {% endfor %} 
+  </div> 
+  
+{% endblock %}

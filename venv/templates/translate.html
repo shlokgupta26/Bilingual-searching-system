@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+{% block body %}
+{% include '_nav_bar.html' %}
+
+  <div class="container">
+    <form class="mt-5" name="search" action="/translate_results">
+      <div class="col-6 mx-auto input-group">
+        <input type="text" class="form-control" name="query2" value="{{ request.args.get('query2') }}" placeholder="query..."
+        size="50">
+        <button type="submit" class="btn btn-success">Search</button>
+      </div>
+    </form>
+  </div>
+  <br>
+  <!-- {{ request.args.get('query2') }} -->
+  <div class="container">
+    <div class="col mt-3">
+      <div class="col">
+        <div class="container border border-secondary">
+            <strong>Translation:</strong>
+            <br>
+            Direct:{{ trans_results1 }}
+            <br>
+            Noisy:{{ trans_results2 }}
+            <br>
+            Noisy2:{{ trans_results3 }}
+        </div>
+      </div>
+    </div>
+  </div> 
+  
+{% endblock %}

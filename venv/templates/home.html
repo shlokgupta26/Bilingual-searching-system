@@ -1,0 +1,75 @@
+{% extends 'layout.html' %}
+{% block body %}
+{% include '_nav_bar.html' %}
+
+  <div class="container">
+    <form class="mt-5" name="search" action="/fetch">
+      <div class="col-6 mx-auto input-group">
+        <input type="text" class="form-control" name="query1" value="{{ request.args.get('query1') }}" placeholder="query..."
+        size="50">
+        <input type="text" class="form-control" name="num_res" value="{{ request.args.get('num_res') }}" placeholder="num_of_res..."
+        size="50">
+        <button type="submit" class="btn btn-success">Search</button>
+      </div>
+    </form>
+  </div>
+  <br>
+  <!--Translation:-->
+  <div class="container">
+    <div class="col mt-3">
+      <div class="col">
+        <div class="container border border-secondary">
+            <strong>Translation:</strong>
+            <br>
+            <strong>Direct (Without Smoothing) :</strong> {{ trans_results1 }}
+            <br>
+            <strong>Noisy (After Laplace Smoothing) :</strong> {{ trans_results2 }}
+            <br>
+            <strong>Noisy2 (After Katz-Backoff Smoothing) :</strong> {{ trans_results3 }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <!--Retrieval:-->
+  <div class="container">
+    <strong>Direct:</strong>
+    {% for doc in results1 %}
+      <div class="col mt-3">
+        <div class="col">
+          <div class="container border border-secondary">
+              <strong>{{ doc[0] }}:</strong>
+              {{ doc[1] }}
+          </div>
+        </div>
+      </div>
+    {% endfor %} 
+  </div> 
+  <div class="container">
+    <strong>Noisy:</strong>
+    {% for doc in results2 %}
+      <div class="col mt-3">
+        <div class="col">
+          <div class="container border border-secondary">
+              <strong>{{ doc[0] }}:</strong>
+              {{ doc[1] }}
+          </div>
+        </div>
+      </div>
+    {% endfor %} 
+  </div> 
+  <div class="container">
+    <strong>Noisy2:</strong>
+    {% for doc in results3 %}
+      <div class="col mt-3">
+        <div class="col">
+          <div class="container border border-secondary">
+              <strong>{{ doc[0] }}:</strong>
+              {{ doc[1] }}
+          </div>
+        </div>
+      </div>
+    {% endfor %} 
+  </div> 
+  
+{% endblock %}
